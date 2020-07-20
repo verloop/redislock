@@ -162,8 +162,7 @@ func (l *Lock) Refresh(ttl time.Duration, opt *Options) error {
 	con := l.client.pool.Get()
 	defer con.Close()
 
-	ttlVal := strconv.FormatInt(int64(ttl/time.Millisecond), 10)
-	status, err := redis.Int64(luaRefresh.Do(con, l.key, l.value, ttlVal))
+	status, err := redis.Int64(luaRefresh.Do(con, l.key, l.value, strconv.FormatInt(ttl.Milliseconds(), 10)))
 	if err != nil {
 		return err
 	} else if status == 1 {
