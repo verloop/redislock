@@ -5,8 +5,8 @@ import (
 	"log"
 	"time"
 
-	"github.com/bsm/redislock"
 	"github.com/garyburd/redigo/redis"
+	"github.com/verloop/redislock"
 )
 
 func Example() {
